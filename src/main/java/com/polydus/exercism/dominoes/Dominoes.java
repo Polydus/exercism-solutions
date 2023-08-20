@@ -1,4 +1,4 @@
-package com.polydus.excercism.dominoes;
+package com.polydus.exercism.dominoes;
 
 import java.util.ArrayList;
 import java.util.List;

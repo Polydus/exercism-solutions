@@ -1,5 +1,4 @@
-import com.polydus.excercism.poker.Poker;
-import org.junit.Ignore;
+import com.polydus.exercism.poker.Poker;
 import org.junit.Test;
 
 import java.util.Arrays;

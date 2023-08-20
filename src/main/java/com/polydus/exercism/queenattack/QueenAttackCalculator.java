@@ -1,4 +1,4 @@
-package com.polydus.excercism.queenattack;
+package com.polydus.exercism.queenattack;
 
 import static java.lang.Math.abs;
 

@@ -1,4 +1,4 @@
-package com.polydus.excercism.poker;
+package com.polydus.exercism.poker;
 
 import java.util.*;
 
@@ -246,14 +246,29 @@ public class Poker {
                 return remainingHands.stream().map(it -> it.hand).toList();
             }
             case HIGH_CARD, FLUSH, STRAIGHT, STRAIGHT_FLUSH -> {
-                //exception for ace because a straight that starts with A is actually lower value
-                //so  [3, 4, 5, 6, A] beats [A, 2, 3, 4, 5]
+
                 ArrayList<Hand> remainingHands = new ArrayList<>(allOfBestType);
 
                 if(bestHand == Hand.HandType.STRAIGHT || bestHand == Hand.HandType.STRAIGHT_FLUSH){
-                    //var lowest =
-                }
+                    //exception for ace because a straight that starts with A is actually lower value
+                    //so  [3, 4, 5, 6, A] beats [A, 2, 3, 4, 5]
 
+                    Hand.Card.Rank[] ranks = {Hand.Card.Rank.RANK_A, Hand.Card.Rank.RANK_2};
+
+                    var handsWithLowestStraight = remainingHands.stream()
+                            .filter(it -> it.hasAllOfTheseRanks(ranks)).toList();
+
+                    if(remainingHands.size() > handsWithLowestStraight.size()){
+                        //have better straights than this, so continue with those
+                        remainingHands.removeAll(handsWithLowestStraight);
+                        if(remainingHands.size() == 1){
+                            return remainingHands.stream().map(it -> it.hand).toList();
+                        }
+                    } else {
+                        //return lowest straights
+                        return handsWithLowestStraight.stream().map(it -> it.hand).toList();
+                    }
+                }
 
                 //have to compare all cards, not just the highest one
 
@@ -517,8 +532,6 @@ public class Poker {
             return Collections.emptyList();
         }
 
-
-
         List<Card> singleCards(){
             var cardsByRank = new HashMap<Card.Rank, ArrayList<Card>>();
             for(Card.Rank r: Card.Rank.values()) cardsByRank.put(r, new ArrayList<>());
@@ -550,7 +563,13 @@ public class Poker {
             return list.get(list.size() - 1 - offset);
         }
 
-
+        boolean hasAllOfTheseRanks(Card.Rank[] ranks){
+            for(var i = 0; i < ranks.length; i++){
+                final var iFinal = i;
+                if(Arrays.stream(cards).noneMatch(it -> it.rank.ordinal() == ranks[iFinal].ordinal())) return false;
+            }
+            return true;
+        }
 
         Card[] getCardsWithExceptions(Card.Rank exceptionRank, int amount){
             //assume we don't ask for an invalid index
@@ -580,7 +599,7 @@ public class Poker {
             return hand;
         }
 
-        private class Card {
+        class Card {
 
             enum Suit {
                 HEARTS(Color.BLACK),

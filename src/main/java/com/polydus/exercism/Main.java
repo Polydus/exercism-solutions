@@ -1,4 +1,4 @@
-package com.polydus.excercism;
+package com.polydus.exercism;
 
 public class Main {
     public static void main(String[] args) {

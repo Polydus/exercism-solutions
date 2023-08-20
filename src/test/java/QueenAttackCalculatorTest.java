@@ -1,4 +1,4 @@
-import com.polydus.excercism.queenattack.QueenAttackCalculator;
+import com.polydus.exercism.queenattack.QueenAttackCalculator;
 import org.junit.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;

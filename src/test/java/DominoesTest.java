@@ -1,7 +1,7 @@
 
-import com.polydus.excercism.dominoes.ChainNotFoundException;
-import com.polydus.excercism.dominoes.Domino;
-import com.polydus.excercism.dominoes.Dominoes;
+import com.polydus.exercism.dominoes.ChainNotFoundException;
+import com.polydus.exercism.dominoes.Domino;
+import com.polydus.exercism.dominoes.Dominoes;
 import org.junit.Test;
 
 import java.util.ArrayList;

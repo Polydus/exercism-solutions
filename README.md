@@ -1,6 +1,6 @@
 # Exercism
 
-Here are some of my solutions for exercises on [Excercism.org](https://exercism.org/)
+Here are some of my solutions for exercises on [Exercism.org](https://exercism.org/)
 
 ### License
 

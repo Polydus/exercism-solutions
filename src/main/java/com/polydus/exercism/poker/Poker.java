@@ -21,9 +21,7 @@ public class Poker {
         final Hand.HandType finalBestHand = bestHand;
         var allOfBestType = sorted.stream().filter(it -> it.currentHandType == finalBestHand).toList();
 
-        if(allOfBestType.size() == 1){
-            return allOfBestType.stream().map(it -> it.hand).toList();
-        }
+        if(allOfBestType.size() == 1) return allOfBestType.stream().map(it -> it.hand).toList();
 
         //return the best
         switch (bestHand){
@@ -64,9 +62,6 @@ public class Poker {
 
                     if(handsWithBestCard.size() == 1) return handsWithBestCard.stream().map(it -> it.hand).toList();
                 }
-
-
-
             }
             case TWO_PAIR ->  {
                 //check if the two pairs are equal
@@ -164,9 +159,6 @@ public class Poker {
 
                     if(handsWithBestCard.size() == 1) return handsWithBestCard.stream().map(it -> it.hand).toList();
                 }
-
-
-
             }
             case FOUR_OF_A_KIND -> {
                 //find best pair
@@ -203,8 +195,6 @@ public class Poker {
                 }
 
                 return remainingHands.stream().map(it -> it.hand).toList();
-
-
             }
 
             case FULL_HOUSE ->  {
@@ -271,7 +261,6 @@ public class Poker {
                 }
 
                 //have to compare all cards, not just the highest one
-
                 for(var i = 0; i < 5; i++){
                     final var finalIndex = i;
 
@@ -286,18 +275,14 @@ public class Poker {
                     remainingHands.clear();
                     remainingHands.addAll(next);
                 }
-
                 return remainingHands.stream().map(it -> it.hand).toList();
             }
         }
-
         return allOfBestType.stream().map(it -> it.hand).toList();
     }
 
     private class Hand{
-
         private Card[] cards;
-
         private String hand;
         private HandType currentHandType = HandType.HIGH_CARD;
 
@@ -313,7 +298,6 @@ public class Poker {
             ONE_PAIR,
             HIGH_CARD,
             ;
-
         }
 
         public Hand(String hand) {
@@ -362,12 +346,7 @@ public class Poker {
                 cards[i] = new Card(suit, rank);
             }
 
-
-            for(Card c : cards){
-                //System.out.println(c.rank + " of " + c.suit);
-            }
             calcCurrentHand();
-           // System.out.println(currentHandType);
         }
 
         void calcCurrentHand(){
@@ -457,18 +436,14 @@ public class Poker {
                 var found = true;
                 for(var i = 1; i < sortedByRank.size() - 1; i++){
                     var delta = sortedByRank.get(i).getRankOrdinal() - sortedByRank.get(i - 1).getRankOrdinal();
-                    if(delta != 1){
-                        found = false;
-                    }
+                    if(delta != 1) found = false;
                 }
                 if(found) return true;
             }
 
             for(var i = 1; i < sortedByRank.size(); i++){
                 var delta = sortedByRank.get(i).getRankOrdinal() - sortedByRank.get(i - 1).getRankOrdinal();
-                if(delta != 1){
-                    return false;
-                }
+                if(delta != 1) return false;
             }
             return true;
         }
@@ -488,9 +463,7 @@ public class Poker {
                 var rank = Card.Rank.values()[i];
                 if(cardsByRank.get(rank).size() >= pairSize){
                     pairsFound++;
-                    if(pairsFound == pairAmount){
-                        return true;
-                    }
+                    if(pairsFound == pairAmount) return true;
                 }
             }
             return false;
@@ -583,20 +556,7 @@ public class Poker {
                 }
             }
 
-            //var list = Arrays.stream(cards).sorted(Comparator.comparingInt(Card::getRankOrdinal)).toList();
-            return list.toArray(Card[]::new);//list.get(list.size() - 1 - offset);
-        }
-
-        public Card[] getCards() {
-            return cards;
-        }
-
-        public HandType getCurrentHandType() {
-            return currentHandType;
-        }
-
-        public String getHand() {
-            return hand;
+            return list.toArray(Card[]::new);
         }
 
         class Card {
@@ -607,10 +567,9 @@ public class Poker {
                 CLUBS(Color.BLACK),
                 SPADES(Color.BLACK),
                 ;
-
                 public final Color color;
 
-                private Suit(Color color) {
+                Suit(Color color) {
                     this.color = color;
                 }
             }
@@ -640,7 +599,6 @@ public class Poker {
             Suit suit;
             Rank rank;
 
-
             public Card(Suit suit, Rank rank) {
                 this.suit = suit;
                 this.rank = rank;
@@ -655,9 +613,5 @@ public class Poker {
                 return "Card{" + "suit=" + suit + ", rank=" + rank + '}';
             }
         }
-
-
-
     }
-
 }
